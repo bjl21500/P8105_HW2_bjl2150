@@ -7,10 +7,25 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
 ```
 
 ## Problem 1
 
+```{r}
+## Reading in the NYC transit csv file plus cleaning the data
+
+NYC_Transit = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
+  janitor::clean_names()
+
+## Removing the not requested variables
+  
+select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
+       -north_south_street, -east_west_street, -corner, -entrance_latitude, 
+       -entrance_longitude, -station_location, -entrance_location) 
+         
+```
 
 
 ## Problem 2
