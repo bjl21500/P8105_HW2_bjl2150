@@ -150,28 +150,15 @@ NYC_Transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_
 ##   `Entrance Longitude` = col_double()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
-<pre class="r"><code>## Removing the not requested variables
+<pre class="r"><code>View(NYC_Transit)
+
+## Removing the not requested variables
   
-select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
+NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
        -north_south_street, -east_west_street, -corner, -entrance_latitude, 
-       -entrance_longitude, -station_location, -entrance_location) </code></pre>
-<pre><code>## # A tibble: 1,868 x 20
-##    division line  station_name station_latitude station_longitu~ route1
-##    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; 
-##  1 BMT      4 Av~ 25th St                  40.7            -74.0 R     
-##  2 BMT      4 Av~ 25th St                  40.7            -74.0 R     
-##  3 BMT      4 Av~ 36th St                  40.7            -74.0 N     
-##  4 BMT      4 Av~ 36th St                  40.7            -74.0 N     
-##  5 BMT      4 Av~ 36th St                  40.7            -74.0 N     
-##  6 BMT      4 Av~ 45th St                  40.6            -74.0 R     
-##  7 BMT      4 Av~ 45th St                  40.6            -74.0 R     
-##  8 BMT      4 Av~ 45th St                  40.6            -74.0 R     
-##  9 BMT      4 Av~ 45th St                  40.6            -74.0 R     
-## 10 BMT      4 Av~ 53rd St                  40.6            -74.0 R     
-## # ... with 1,858 more rows, and 14 more variables: route2 &lt;chr&gt;,
-## #   route3 &lt;chr&gt;, route4 &lt;chr&gt;, route5 &lt;chr&gt;, route6 &lt;chr&gt;, route7 &lt;chr&gt;,
-## #   route8 &lt;int&gt;, route9 &lt;int&gt;, route10 &lt;int&gt;, route11 &lt;int&gt;,
-## #   entrance_type &lt;chr&gt;, entry &lt;chr&gt;, vending &lt;chr&gt;, ada &lt;lgl&gt;</code></pre>
+       -entrance_longitude, -station_location, -entrance_location) 
+
+## Recode funtion</code></pre>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
