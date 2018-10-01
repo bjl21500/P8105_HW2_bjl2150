@@ -29,6 +29,7 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
 
 ## Recode funtion
 
+Recode(entry, yes=TRUE, no=FALSE)
 
          
 ```
