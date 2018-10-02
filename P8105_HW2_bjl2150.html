@@ -156,9 +156,8 @@ NYC_Transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_
   
 NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
        -north_south_street, -east_west_street, -corner, -entrance_latitude, 
-       -entrance_longitude, -station_location, -entrance_location) 
-
-## Recode funtion</code></pre>
+       -entrance_longitude, -station_location, -entrance_location)%&gt;%
+      mutate(entry = recode(entry, YES = TRUE, NO = FALSE))</code></pre>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
