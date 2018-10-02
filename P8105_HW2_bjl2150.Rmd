@@ -28,7 +28,18 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
        -entrance_longitude, -station_location, -entrance_location)%>%
       mutate(entry = recode(entry, YES = TRUE, NO = FALSE))
 ```
+```{r}
+## Distinct function
 
+ distinct(NYC_Transit_clean, station_name, line)
+```
+ 
+There are 456 distinct stations.
+ 
+ 
+ ## ADA compliant
+ 
+```
 
 ## Problem 2
 

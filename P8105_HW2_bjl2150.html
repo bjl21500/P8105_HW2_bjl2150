@@ -158,6 +158,26 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
        -north_south_street, -east_west_street, -corner, -entrance_latitude, 
        -entrance_longitude, -station_location, -entrance_location)%&gt;%
       mutate(entry = recode(entry, YES = TRUE, NO = FALSE))</code></pre>
+<pre class="r"><code>## Distinct function
+
+ distinct(NYC_Transit_clean, station_name, line)</code></pre>
+<pre><code>## # A tibble: 465 x 2
+##    line     station_name            
+##    &lt;chr&gt;    &lt;chr&gt;                   
+##  1 4 Avenue 25th St                 
+##  2 4 Avenue 36th St                 
+##  3 4 Avenue 45th St                 
+##  4 4 Avenue 53rd St                 
+##  5 4 Avenue 59th St                 
+##  6 4 Avenue 77th St                 
+##  7 4 Avenue 86th St                 
+##  8 4 Avenue 95th St                 
+##  9 4 Avenue 9th St                  
+## 10 4 Avenue Atlantic Av-Barclays Ctr
+## # ... with 455 more rows</code></pre>
+<p>There are 456 distinct stations.</p>
+<p>## ADA compliant</p>
+<p>```</p>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
