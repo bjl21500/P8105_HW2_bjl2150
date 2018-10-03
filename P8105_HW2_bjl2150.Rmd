@@ -19,8 +19,6 @@ library(tidyverse)
 NYC_Transit = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
   janitor::clean_names()
 
-View(NYC_Transit)
-
 ## Removing the not requested variables
   
 NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 

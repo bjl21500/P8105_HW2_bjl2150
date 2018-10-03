@@ -150,9 +150,7 @@ NYC_Transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_
 ##   `Entrance Longitude` = col_double()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
-<pre class="r"><code>View(NYC_Transit)
-
-## Removing the not requested variables
+<pre class="r"><code>## Removing the not requested variables
   
 NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
        -north_south_street, -east_west_street, -corner, -entrance_latitude, 
