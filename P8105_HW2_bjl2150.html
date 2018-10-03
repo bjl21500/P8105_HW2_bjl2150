@@ -152,15 +152,17 @@ NYC_Transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_
 <pre><code>## See spec(...) for full column specifications.</code></pre>
 <pre class="r"><code>## Removing the not requested variables
   
-NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
-       -north_south_street, -east_west_street, -corner, -entrance_latitude, 
-       -entrance_longitude, -station_location, -entrance_location)%&gt;%
+NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, 
+                           -free_crossover, -north_south_street, -east_west_street, 
+                           -corner, -entrance_latitude, -entrance_longitude, 
+                           -station_location, -entrance_location)%&gt;%
       mutate(entry = recode(entry, YES = TRUE, NO = FALSE))
 
 ## Obtaining the dimension (rows X columns) of the datafile NYC_Transit_clean
 
 dim(NYC_Transit_clean)</code></pre>
 <pre><code>## [1] 1868   20</code></pre>
+<p>Paragraph</p>
 <pre class="r"><code>## Question 1: Distinct function
 
  distinct(NYC_Transit_clean, station_name, line)</code></pre>
@@ -197,11 +199,21 @@ distinct(NYC_Transit_clean, station_name, ada = TRUE)</code></pre>
 ## 10 Atlantic Av-Barclays Ctr TRUE 
 ## # ... with 346 more rows</code></pre>
 <p>There are 356 stations that are ADA compliant.</p>
-<pre class="r"><code>## Question 3: Proportion</code></pre>
+<pre class="r"><code>## Question 3: Proportion
+
+
+
+
+filter(NYC_Transit_clean, vending == &quot;NO&quot;) %&gt;%
+nrow()</code></pre>
+<pre><code>## [1] 183</code></pre>
+<pre class="r"><code>filter(NYC_Transit_clean, entry == &quot;TRUE&quot;) %&gt;%
+nrow()</code></pre>
+<pre><code>## [1] 1753</code></pre>
 <pre class="r"><code>## Gathering route columns to make a tidier dataset
 
 NYC_Transit_clean_tidy =
-  gather(NYC_Transit_clean, key = &quot;route&quot;, value = &quot;train_route&quot;, route1:route11)</code></pre>
+  gather(NYC_Transit_clean, key = &quot;route_number&quot;, value = &quot;route_name&quot;, route1:route11) </code></pre>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>

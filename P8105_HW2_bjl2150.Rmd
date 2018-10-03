@@ -21,15 +21,17 @@ NYC_Transit = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.
 
 ## Removing the not requested variables
   
-NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
-       -north_south_street, -east_west_street, -corner, -entrance_latitude, 
-       -entrance_longitude, -station_location, -entrance_location)%>%
+NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, 
+                           -free_crossover, -north_south_street, -east_west_street, 
+                           -corner, -entrance_latitude, -entrance_longitude, 
+                           -station_location, -entrance_location)%>%
       mutate(entry = recode(entry, YES = TRUE, NO = FALSE))
 
 ## Obtaining the dimension (rows X columns) of the datafile NYC_Transit_clean
 
 dim(NYC_Transit_clean)
 ```
+Paragraph
 
 ```{r}
 ## Question 1: Distinct function
@@ -50,13 +52,22 @@ There are 356 stations that are ADA compliant.
 ## Question 3: Proportion
 
 
+
+
+filter(NYC_Transit_clean, vending == "NO") %>%
+nrow()
+
+filter(NYC_Transit_clean, entry == "TRUE") %>%
+nrow()
 ```
 
 ```{r}
 ## Gathering route columns to make a tidier dataset
 
 NYC_Transit_clean_tidy =
-  gather(NYC_Transit_clean, key = "route", value = "train_route", route1:route11)
+  gather(NYC_Transit_clean, key = "route_number", value = "route_name", route1:route11) 
+
+
 
 ```
 ## Problem 2
