@@ -174,8 +174,24 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
 ## 10 4 Avenue Atlantic Av-Barclays Ctr
 ## # ... with 455 more rows</code></pre>
 <p>There are 456 distinct stations.</p>
-<p>## ADA compliant</p>
-<p>```</p>
+<pre class="r"><code>## ADA compliant
+
+distinct(NYC_Transit_clean, station_name, ada = TRUE)</code></pre>
+<pre><code>## # A tibble: 356 x 2
+##    station_name             ada  
+##    &lt;chr&gt;                    &lt;lgl&gt;
+##  1 25th St                  TRUE 
+##  2 36th St                  TRUE 
+##  3 45th St                  TRUE 
+##  4 53rd St                  TRUE 
+##  5 59th St                  TRUE 
+##  6 77th St                  TRUE 
+##  7 86th St                  TRUE 
+##  8 95th St                  TRUE 
+##  9 9th St                   TRUE 
+## 10 Atlantic Av-Barclays Ctr TRUE 
+## # ... with 346 more rows</code></pre>
+<p>There are 356 stations that are ADA compliant.</p>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>

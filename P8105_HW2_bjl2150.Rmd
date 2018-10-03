@@ -34,12 +34,18 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
  
 There are 456 distinct stations.
  
- 
- ## ADA compliant
- 
+
+```{r}
+## ADA compliant
+
+distinct(NYC_Transit_clean, station_name, ada = TRUE)
 ```
+There are 356 stations that are ADA compliant.
+ 
 
 ## Problem 2
+
+
 
 
 
