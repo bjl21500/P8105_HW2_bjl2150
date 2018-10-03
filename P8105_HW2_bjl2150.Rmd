@@ -52,6 +52,13 @@ There are 356 stations that are ADA compliant.
 
 ```
 
+```{r}
+## Gathering route columns to make a tidier dataset
+
+NYC_Transit_clean_tidy =
+  gather(NYC_Transit_clean, key = "route", value = "train_route", route1:route11)
+
+```
 ## Problem 2
 
 

@@ -198,6 +198,10 @@ distinct(NYC_Transit_clean, station_name, ada = TRUE)</code></pre>
 ## # ... with 346 more rows</code></pre>
 <p>There are 356 stations that are ADA compliant.</p>
 <pre class="r"><code>## Question 3: Proportion</code></pre>
+<pre class="r"><code>## Gathering route columns to make a tidier dataset
+
+NYC_Transit_clean_tidy =
+  gather(NYC_Transit_clean, key = &quot;route&quot;, value = &quot;train_route&quot;, route1:route11)</code></pre>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
