@@ -25,23 +25,32 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
        -north_south_street, -east_west_street, -corner, -entrance_latitude, 
        -entrance_longitude, -station_location, -entrance_location)%>%
       mutate(entry = recode(entry, YES = TRUE, NO = FALSE))
+
+## Obtaining the dimension (rows X columns) of the datafile NYC_Transit_clean
+
+dim(NYC_Transit_clean)
 ```
+
 ```{r}
-## Distinct function
+## Question 1: Distinct function
 
  distinct(NYC_Transit_clean, station_name, line)
 ```
  
 There are 456 distinct stations.
- 
 
 ```{r}
-## ADA compliant
+## Question 2: ADA compliance
 
 distinct(NYC_Transit_clean, station_name, ada = TRUE)
 ```
 There are 356 stations that are ADA compliant.
- 
+
+```{r}
+## Question 3: Proportion
+
+
+```
 
 ## Problem 2
 

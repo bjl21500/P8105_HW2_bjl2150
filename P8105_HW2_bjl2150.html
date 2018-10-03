@@ -155,8 +155,13 @@ NYC_Transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_
 NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, -free_crossover, 
        -north_south_street, -east_west_street, -corner, -entrance_latitude, 
        -entrance_longitude, -station_location, -entrance_location)%&gt;%
-      mutate(entry = recode(entry, YES = TRUE, NO = FALSE))</code></pre>
-<pre class="r"><code>## Distinct function
+      mutate(entry = recode(entry, YES = TRUE, NO = FALSE))
+
+## Obtaining the dimension (rows X columns) of the datafile NYC_Transit_clean
+
+dim(NYC_Transit_clean)</code></pre>
+<pre><code>## [1] 1868   20</code></pre>
+<pre class="r"><code>## Question 1: Distinct function
 
  distinct(NYC_Transit_clean, station_name, line)</code></pre>
 <pre><code>## # A tibble: 465 x 2
@@ -174,7 +179,7 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
 ## 10 4 Avenue Atlantic Av-Barclays Ctr
 ## # ... with 455 more rows</code></pre>
 <p>There are 456 distinct stations.</p>
-<pre class="r"><code>## ADA compliant
+<pre class="r"><code>## Question 2: ADA compliance
 
 distinct(NYC_Transit_clean, station_name, ada = TRUE)</code></pre>
 <pre><code>## # A tibble: 356 x 2
@@ -192,6 +197,7 @@ distinct(NYC_Transit_clean, station_name, ada = TRUE)</code></pre>
 ## 10 Atlantic Av-Barclays Ctr TRUE 
 ## # ... with 346 more rows</code></pre>
 <p>There are 356 stations that are ADA compliant.</p>
+<pre class="r"><code>## Question 3: Proportion</code></pre>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
