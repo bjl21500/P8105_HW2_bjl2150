@@ -258,8 +258,11 @@ distinct(station_name, line, ada = TRUE)</code></pre>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
 <pre class="r"><code>library(readxl)
+## Importing and cleaning Mr. Trash Wheel excel file
 
-trash_wheel = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx&quot;) </code></pre>
+trash_wheel = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx&quot;, 
+              sheet = &quot;Mr. Trash Wheel&quot;) %&gt;% 
+              janitor::clean_names()</code></pre>
 </div>
 <div id="problem-3" class="section level2">
 <h2>Problem 3</h2>
