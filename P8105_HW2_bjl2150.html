@@ -260,13 +260,13 @@ distinct(station_name, line, ada = TRUE)</code></pre>
 <pre class="r"><code>library(readxl)
 ## Importing and cleaning Mr. Trash Wheel excel file
 
-trash_wheel = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx&quot;, 
+trash_wheel = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx&quot;, 
               sheet = &quot;Mr. Trash Wheel&quot;) %&gt;% 
               janitor::clean_names()
 
 
 str(trash_wheel)</code></pre>
-<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    360 obs. of  15 variables:
+<pre><code>## Classes 'tbl_df', 'tbl' and 'data.frame':    336 obs. of  15 variables:
 ##  $ dumpster          : num  1 2 3 4 5 6 7 8 NA 9 ...
 ##  $ month             : chr  &quot;May&quot; &quot;May&quot; &quot;May&quot; &quot;May&quot; ...
 ##  $ year              : num  2014 2014 2014 2014 2014 ...
