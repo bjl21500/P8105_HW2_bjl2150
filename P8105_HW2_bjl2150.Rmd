@@ -111,9 +111,20 @@ mutate(sports_balls = as.integer(sports_balls))
 
 ## Reading in Trash Wheel, selecting in sheet "2016 Precipiation, and cleaning"
 
-Precip_16_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
+precip_16 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "2016 Precipitation", range = "A2:B14") %>%
-  janitor::clean_names()
- ```
+ janitor::clean_names() %>%
+  mutate(2016)
+
+
+precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
+              sheet = "2017 Precipitation", range = "A2:B14") %>%
+ janitor::clean_names() %>%
+  mutate(2017)
+```
+
+```{r}
+
+```
 
 ## Problem 3
