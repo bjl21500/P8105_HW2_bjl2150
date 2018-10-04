@@ -121,6 +121,9 @@ precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
               sheet = "2017 Precipitation", range = "A2:B14") %>%
  janitor::clean_names() %>%
   mutate(year = 2017)
+
+precipitation = bind_rows(precip_16, precip_17) %>%
+   mutate(month = month.name[month])
 ```
 
 ```{r}
@@ -132,6 +135,7 @@ precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
 ```{r}
 # install.packages("devtools")
 devtools::install_github("p8105/p8105.datasets")
+
 
 
 
