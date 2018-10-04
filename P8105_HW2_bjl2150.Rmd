@@ -88,7 +88,11 @@ There are 84 distinct stations that are ADA compliant.
 ## Problem 2
 
 
+```{r}
+library(readxl)
 
+trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx") 
+```
 
 
 ## Problem 3
