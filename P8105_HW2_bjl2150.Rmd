@@ -95,6 +95,9 @@ library(readxl)
 trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2017-9-26.xlsx", 
               sheet = "Mr. Trash Wheel") %>% 
               janitor::clean_names()
+
+
+str(trash_wheel)
 ```
 
 
