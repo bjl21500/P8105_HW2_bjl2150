@@ -133,8 +133,8 @@ precipitation = bind_rows(precip_16, precip_17) %>%
 ## Problem 3
 
 ```{r}
-
 # install.packages("devtools")
+
 devtools::install_github("p8105/p8105.datasets")
 
 library(p8105.datasets)
@@ -144,6 +144,7 @@ data(brfss_smart2010)
   
 brfss_smart2010 = brfss_smart2010 %>% 
   clean_names() %>%
-select(year, locationabbr, locationdesc, data_value, response)
-
+  filter(topic == "Overall Health") %>%
+select(-class, -topic, -question, -sample_size, -(confidence_limit_low:geo_location)) 
+  
 ```
