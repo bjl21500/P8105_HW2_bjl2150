@@ -114,13 +114,13 @@ mutate(sports_balls = as.integer(sports_balls))
 precip_16 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "2016 Precipitation", range = "A2:B14") %>%
  janitor::clean_names() %>%
-  mutate(2016)
+  mutate(year = 2016)
 
 
 precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "2017 Precipitation", range = "A2:B14") %>%
  janitor::clean_names() %>%
-  mutate(2017)
+  mutate(year = 2017)
 ```
 
 ```{r}
@@ -128,3 +128,11 @@ precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
 ```
 
 ## Problem 3
+
+```{r}
+# install.packages("devtools")
+devtools::install_github("p8105/p8105.datasets")
+
+
+
+```
