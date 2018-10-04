@@ -109,6 +109,7 @@ mutate(sports_balls = as.integer(sports_balls))
 ```{r}
 ## Part 2B
 
+## Reading in Trash Wheel, selecting in sheet "2016 Precipiation, and cleaning"
 
 Precip_16_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "2016 Precipitation", range = "A2:B14") %>%

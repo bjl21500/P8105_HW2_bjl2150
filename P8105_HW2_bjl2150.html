@@ -274,6 +274,7 @@ trash_wheel = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2018-7-28.xls
 mutate(sports_balls = as.integer(sports_balls)) </code></pre>
 <pre class="r"><code>## Part 2B
 
+## Reading in Trash Wheel, selecting in sheet &quot;2016 Precipiation, and cleaning&quot;
 
 Precip_16_17 = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx&quot;, 
               sheet = &quot;2016 Precipitation&quot;, range = &quot;A2:B14&quot;) %&gt;%
