@@ -258,15 +258,18 @@ distinct(station_name, line, ada = TRUE)</code></pre>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
 <pre class="r"><code>library(readxl)
+
 ## Importing and cleaning Mr. Trash Wheel excel file
 
 trash_wheel = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx&quot;, 
               sheet = &quot;Mr. Trash Wheel&quot;)
 
+
 trash_wheel = read_excel(&quot;./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx&quot;, 
               sheet = &quot;Mr. Trash Wheel&quot;, range = &quot;A2:N336&quot;) %&gt;% 
               janitor::clean_names() %&gt;% 
-              filter(dumpster != &quot;N/A&quot;)</code></pre>
+              filter(dumpster != &quot;N/A&quot;) %&gt;% 
+mutate(sports_balls = as.integer(sports_balls)) </code></pre>
 </div>
 <div id="problem-3" class="section level2">
 <h2>Problem 3</h2>
