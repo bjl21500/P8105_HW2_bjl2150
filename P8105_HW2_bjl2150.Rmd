@@ -2,7 +2,7 @@
 title: "P8105_HW2_bjl2150"
 author: "Briana Lettsome"
 date: "September 27, 2018"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
