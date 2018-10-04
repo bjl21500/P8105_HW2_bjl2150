@@ -89,6 +89,8 @@ There are 84 distinct stations that are ADA compliant.
 
 
 ```{r}
+## Part 2 A
+
 library(readxl)
 
 ## Importing and cleaning Mr. Trash Wheel excel file
@@ -102,9 +104,15 @@ trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
               janitor::clean_names() %>% 
               filter(dumpster != "N/A") %>% 
 mutate(sports_balls = as.integer(sports_balls)) 
-  
-
 ```
 
+```{r}
+## Part 2B
+
+
+Precip_16_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
+              sheet = "2016 Precipitation", range = "A2:B14") %>%
+  janitor::clean_names()
+ ```
 
 ## Problem 3
