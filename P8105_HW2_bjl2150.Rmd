@@ -137,10 +137,10 @@ precipitation = bind_rows(precip_16, precip_17) %>%
 devtools::install_github("p8105/p8105.datasets")
 
 library(p8105.datasets)
+library(janitor)
 
-data(brfss_smart2010) %>% 
-  janitor::clean_names()
-
-
-
+data(brfss_smart2010)
+  
+brfss_smart2010 = brfss_smart2010 %>% 
+  clean_names()
 ```
