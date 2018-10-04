@@ -143,5 +143,7 @@ library(janitor)
 data(brfss_smart2010)
   
 brfss_smart2010 = brfss_smart2010 %>% 
-  clean_names()
+  clean_names() %>%
+select(year, locationabbr, locationdesc, data_value, response)
+
 ```
