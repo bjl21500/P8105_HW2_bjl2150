@@ -133,7 +133,7 @@ $(document).ready(function () {
 <h2>Problem 1</h2>
 <pre class="r"><code>## Reading in the NYC transit csv file plus cleaning the data
 
-NYC_Transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv&quot;) %&gt;%
+nyc_transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv&quot;) %&gt;%
   janitor::clean_names()</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
@@ -152,7 +152,7 @@ NYC_Transit = read_csv(file = &quot;./data/NYC_Transit_Subway_Entrance_And_Exit_
 <pre><code>## See spec(...) for full column specifications.</code></pre>
 <pre class="r"><code>## Removing the not requested variables
   
-NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, 
+nyc_transit_clean = select(nyc_transit, -exit_only, -staffing, -staff_hours, -ada_notes, 
                            -free_crossover, -north_south_street, -east_west_street, 
                            -corner, -entrance_latitude, -entrance_longitude, 
                            -station_location, -entrance_location)%&gt;%
@@ -160,12 +160,12 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
 
 ## Obtaining the dimension (rows X columns) of the datafile NYC_Transit_clean
 
-dim(NYC_Transit_clean)</code></pre>
+dim(nyc_transit_clean)</code></pre>
 <pre><code>## [1] 1868   20</code></pre>
 <p>Paragraph</p>
 <pre class="r"><code>## Question 1: Distinct function
 
- distinct(NYC_Transit_clean, station_name, line)</code></pre>
+ distinct(nyc_transit_clean, station_name, line)</code></pre>
 <pre><code>## # A tibble: 465 x 2
 ##    line     station_name            
 ##    &lt;chr&gt;    &lt;chr&gt;                   
@@ -180,40 +180,80 @@ dim(NYC_Transit_clean)</code></pre>
 ##  9 4 Avenue 9th St                  
 ## 10 4 Avenue Atlantic Av-Barclays Ctr
 ## # ... with 455 more rows</code></pre>
-<p>There are 456 distinct stations.</p>
+<p>There are 465 distinct stations.</p>
 <pre class="r"><code>## Question 2: ADA compliance
 
-distinct(NYC_Transit_clean, station_name, ada = TRUE)</code></pre>
-<pre><code>## # A tibble: 356 x 2
-##    station_name             ada  
-##    &lt;chr&gt;                    &lt;lgl&gt;
-##  1 25th St                  TRUE 
-##  2 36th St                  TRUE 
-##  3 45th St                  TRUE 
-##  4 53rd St                  TRUE 
-##  5 59th St                  TRUE 
-##  6 77th St                  TRUE 
-##  7 86th St                  TRUE 
-##  8 95th St                  TRUE 
-##  9 9th St                   TRUE 
-## 10 Atlantic Av-Barclays Ctr TRUE 
-## # ... with 346 more rows</code></pre>
-<p>There are 356 stations that are ADA compliant.</p>
+filter(nyc_transit_clean, ada == TRUE) %&gt;%
+distinct(station_name, line, ada = TRUE)</code></pre>
+<pre><code>## # A tibble: 84 x 3
+##    line            station_name                   ada  
+##    &lt;chr&gt;           &lt;chr&gt;                          &lt;lgl&gt;
+##  1 4 Avenue        Atlantic Av-Barclays Ctr       TRUE 
+##  2 4 Avenue        DeKalb Av                      TRUE 
+##  3 4 Avenue        Pacific St                     TRUE 
+##  4 42nd St Shuttle Grand Central                  TRUE 
+##  5 6 Avenue        34th St                        TRUE 
+##  6 6 Avenue        47-50th Sts Rockefeller Center TRUE 
+##  7 6 Avenue        Church Av                      TRUE 
+##  8 63rd Street     21st St                        TRUE 
+##  9 63rd Street     Lexington Av                   TRUE 
+## 10 63rd Street     Roosevelt Island               TRUE 
+## # ... with 74 more rows</code></pre>
+<p>There are 84 stations that are ADA compliant.</p>
 <pre class="r"><code>## Question 3: Proportion
 
 
 
 
-filter(NYC_Transit_clean, vending == &quot;NO&quot;) %&gt;%
+filter(nyc_transit_clean, vending == &quot;NO&quot;) %&gt;%
 nrow()</code></pre>
 <pre><code>## [1] 183</code></pre>
-<pre class="r"><code>filter(NYC_Transit_clean, entry == &quot;TRUE&quot;) %&gt;%
+<pre class="r"><code>filter(nyc_transit_clean, entry == &quot;TRUE&quot;, vending == &quot;NO&quot;) %&gt;%
 nrow()</code></pre>
-<pre><code>## [1] 1753</code></pre>
+<pre><code>## [1] 69</code></pre>
 <pre class="r"><code>## Gathering route columns to make a tidier dataset
 
-NYC_Transit_clean_tidy =
-  gather(NYC_Transit_clean, key = &quot;route_number&quot;, value = &quot;route_name&quot;, route1:route11) </code></pre>
+nyc_transit_tidy =
+  gather(nyc_transit_clean, key = &quot;route_number&quot;, value = &quot;route_name&quot;, route1:route11) 
+
+## Determining distinct stations that serve A train
+
+filter(nyc_transit_tidy, route_name == &quot;A&quot;) %&gt;%
+distinct(station_name, line, route_name = &quot;A&quot;)</code></pre>
+<pre><code>## # A tibble: 60 x 3
+##    line            station_name                  route_name
+##    &lt;chr&gt;           &lt;chr&gt;                         &lt;chr&gt;     
+##  1 42nd St Shuttle Times Square                  A         
+##  2 8 Avenue        125th St                      A         
+##  3 8 Avenue        145th St                      A         
+##  4 8 Avenue        14th St                       A         
+##  5 8 Avenue        168th St - Washington Heights A         
+##  6 8 Avenue        175th St                      A         
+##  7 8 Avenue        181st St                      A         
+##  8 8 Avenue        190th St                      A         
+##  9 8 Avenue        34th St                       A         
+## 10 8 Avenue        42nd St                       A         
+## # ... with 50 more rows</code></pre>
+<p>There are 60 distinct stations that served the A train.</p>
+<pre class="r"><code>## Determining ADA compliance
+
+filter(nyc_transit_tidy, ada == TRUE) %&gt;%
+distinct(station_name, line, ada = TRUE)</code></pre>
+<pre><code>## # A tibble: 84 x 3
+##    line            station_name                   ada  
+##    &lt;chr&gt;           &lt;chr&gt;                          &lt;lgl&gt;
+##  1 4 Avenue        Atlantic Av-Barclays Ctr       TRUE 
+##  2 4 Avenue        DeKalb Av                      TRUE 
+##  3 4 Avenue        Pacific St                     TRUE 
+##  4 42nd St Shuttle Grand Central                  TRUE 
+##  5 6 Avenue        34th St                        TRUE 
+##  6 6 Avenue        47-50th Sts Rockefeller Center TRUE 
+##  7 6 Avenue        Church Av                      TRUE 
+##  8 63rd Street     21st St                        TRUE 
+##  9 63rd Street     Lexington Av                   TRUE 
+## 10 63rd Street     Roosevelt Island               TRUE 
+## # ... with 74 more rows</code></pre>
+<p>There are 84 distinct stations that are ADA compliant.</p>
 </div>
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>

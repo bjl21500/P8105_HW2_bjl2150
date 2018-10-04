@@ -16,12 +16,12 @@ library(tidyverse)
 ```{r}
 ## Reading in the NYC transit csv file plus cleaning the data
 
-NYC_Transit = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
+nyc_transit = read_csv(file = "./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
   janitor::clean_names()
 
 ## Removing the not requested variables
   
-NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ada_notes, 
+nyc_transit_clean = select(nyc_transit, -exit_only, -staffing, -staff_hours, -ada_notes, 
                            -free_crossover, -north_south_street, -east_west_street, 
                            -corner, -entrance_latitude, -entrance_longitude, 
                            -station_location, -entrance_location)%>%
@@ -29,24 +29,25 @@ NYC_Transit_clean = select(NYC_Transit, -exit_only, -staffing, -staff_hours, -ad
 
 ## Obtaining the dimension (rows X columns) of the datafile NYC_Transit_clean
 
-dim(NYC_Transit_clean)
+dim(nyc_transit_clean)
 ```
 Paragraph
 
 ```{r}
 ## Question 1: Distinct function
 
- distinct(NYC_Transit_clean, station_name, line)
+ distinct(nyc_transit_clean, station_name, line)
 ```
  
-There are 456 distinct stations.
+There are 465 distinct stations.
 
 ```{r}
 ## Question 2: ADA compliance
 
-distinct(NYC_Transit_clean, station_name, ada = TRUE)
+filter(nyc_transit_clean, ada == TRUE) %>%
+distinct(station_name, line, ada = TRUE)
 ```
-There are 356 stations that are ADA compliant.
+There are 84 stations that are ADA compliant.
 
 ```{r}
 ## Question 3: Proportion
@@ -54,22 +55,36 @@ There are 356 stations that are ADA compliant.
 
 
 
-filter(NYC_Transit_clean, vending == "NO") %>%
+filter(nyc_transit_clean, vending == "NO") %>%
 nrow()
 
-filter(NYC_Transit_clean, entry == "TRUE") %>%
+filter(nyc_transit_clean, entry == "TRUE", vending == "NO") %>%
 nrow()
 ```
 
 ```{r}
 ## Gathering route columns to make a tidier dataset
 
-NYC_Transit_clean_tidy =
-  gather(NYC_Transit_clean, key = "route_number", value = "route_name", route1:route11) 
+nyc_transit_tidy =
+  gather(nyc_transit_clean, key = "route_number", value = "route_name", route1:route11) 
 
+## Determining distinct stations that serve A train
 
-
+filter(nyc_transit_tidy, route_name == "A") %>%
+distinct(station_name, line, route_name = "A")
 ```
+
+There are 60 distinct stations that served the A train.
+
+```{r}
+## Determining ADA compliance
+
+filter(nyc_transit_tidy, ada == TRUE) %>%
+distinct(station_name, line, ada = TRUE)
+```
+There are 84 distinct stations that are ADA compliant.
+
+
 ## Problem 2
 
 
