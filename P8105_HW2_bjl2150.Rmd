@@ -109,7 +109,8 @@ mutate(sports_balls = as.integer(sports_balls))
 ```{r}
 ## Part 2B
 
-## Reading in Trash Wheel, selecting in sheet "2016 Precipiation, and cleaning"
+## Reading in Trash Wheel, selecting in sheet "2016 Precipiation", and cleaning
+library(readxl)
 
 precip_16 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "2016 Precipitation", range = "A2:B14") %>%
@@ -124,7 +125,20 @@ precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
 
 precipitation = bind_rows(precip_16, precip_17) %>%
    mutate(month = month.name[month])
+
+
+# total precipiation in 2017
+
+
 ```
+The number of observations in the dataset trash_wheel is `r dim(trash_wheel)`. The 
+key variables in are dumpster, weight tons of trash, and plastic bottles collected.
+The number of variables in the precipitation dataset is `r dim(precipitation)`. The 
+key variables in this particular data set are the months and years of precipiation 
+as well as the toal amount of precipation
+
+
+
 
 ```{r}
 
