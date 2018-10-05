@@ -213,9 +213,9 @@ median(brfss_spread_2$excellent, na.rm = TRUE)
 
 * There are 404 unique locations included within this dataset.
 
-* Every state is represented. There are total variables within the 'locationsabbr'
-  column indicating that all  states are represented plus an additional state, which 
-  is Washington, D.C.
+* Every state is represented. There are 51 total variables within the 
+'locationsabbr' column indicating that all  states are represented plus an 
+additional state, which is Washington, D.C.
 
 * The state that is observed the most is New Jersey with 146 observations.
   
