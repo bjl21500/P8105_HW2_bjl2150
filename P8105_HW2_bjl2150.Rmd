@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## Problem 1
+# Problem 1
 
 ```{r}
 # Reading in the NYC transit csv file plus cleaning the data
@@ -85,9 +85,9 @@ distinct(station_name, line, ada = TRUE)
 There are 84 distinct stations that are ADA compliant.
 
 
-## Problem 2
+# Problem 2
 
-
+## Use of Mr. Trash Wheel excel dataset
 ```{r}
 ## Part 2 A
 
@@ -141,17 +141,20 @@ median(sports_2016$sports_balls)
   
 
 ```
-Regarding these datasets, the Mr. Trash Wheel excel file was imported and the sheet
-specifically focused on Mr. Trash Wheel was selected for analysis. There were many
+Regarding these datasets, the Mr. Trash Wheel excel file was imported and the sheet,
+specifically focused on Mr. Trash Wheel, was selected for analysis. There were many
 variables retained, including dumpster number, weight of garbage in tons and numbers
-of sports balls and plastic bottles. 
+of sports balls and plastic bottles. The number ofobservations in the the dataset 
+trash_wheel was calculated to be `r dim(trash_wheel)`. They key variables of 
+interest were 
 
-The number of observations in the dataset trash_wheel is `r dim(trash_wheel)`. The 
-key variables in are dumpster, weight tons of trash, and plastic bottles collected.
-The number of variables in the precipitation dataset is `r dim(precipitation)`. The 
-key variables in this particular data set are the months and years of precipiation 
-as well as the toal amount of precipation `r summarize(total_precip, total = sum(total))`.
-The median number of spors balls in a dumpster is `r median(sports_2016$sports_balls)`.
+ 
+There are `r dim(precipitation)` observations in the precipiation dataset. This 
+dataset was created by merging the precip_16 and precip_17 datasets from the Mr. 
+Trash Wheel excel file. The key variables in this particular data set are the
+months and years of precipiation as well as the toal amount of precipation 
+`r summarize(total_precip, total = sum(total))`. The median number of spors balls 
+in a dumpster is `r median(sports_2016$sports_balls)`.
 
 
 ```{r}
