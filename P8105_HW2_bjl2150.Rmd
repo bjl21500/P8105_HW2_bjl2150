@@ -158,7 +158,9 @@ The median number of spors balls in a dumpster is `r median(sports_2016$sports_b
 
 ```
 
-## Problem 3
+# Problem 3
+
+## Importing, cleaning, filtering and tidying brfss_smart2010 dataset
 
 ```{r}
 # install.packages("devtools")
@@ -177,4 +179,5 @@ select(-class, -topic, -question, -sample_size,
        -(confidence_limit_low:geo_location))
 
 brfss_spread = spread(brfss_smart2010, key = response, value = data_value)
+
 ```
