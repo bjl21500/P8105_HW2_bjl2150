@@ -217,7 +217,6 @@ median(brfss_spread_2$excellent, na.rm = TRUE)
 
   * 1C.  The state that is observed the most is New Jersey with 146 observations.
   
-  
  
 2. `r median(brfss_spread_2$excellent, na.rm = TRUE)` is the median of the "Excellent"
     response values in 2002. 
@@ -230,9 +229,19 @@ ggplot(brfss_spread_2, aes(x = excellent)) + geom_histogram()
 
 ### Scatterplot of Queens and New York Counties
 ```{r}
-brfss_scatter = select(brfss_spread, excellent, locationdesc, year) %>%
-    filter(locationdesc == "NY - Queens County") 
 
+# Selecting of specific columns
+brfss_scatter = select(brfss_spread, excellent, locationdesc, year) 
+
+
+# Specifiying which vaiables in 'locationdesc' column
+target <- c("NY - New York County", "NY - Queens County") 
+  
+# Creating the dataframe to make scatterplot with above specifications
+brfss_plot = filter(brfss_scatter, locationdesc %in% target) %>% View
+
+
+# Making of scatterplot
 
 
 ```
