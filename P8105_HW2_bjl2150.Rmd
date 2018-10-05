@@ -154,8 +154,6 @@ as well as the toal amount of precipation `r summarize(total_precip, total = sum
 The median number of spors balls in a dumpster is `r median(sports_2016$sports_balls)`.
 
 
-
-
 ```{r}
 
 ```
@@ -175,6 +173,8 @@ data(brfss_smart2010)
 brfss_smart2010 = brfss_smart2010 %>% 
   clean_names() %>%
   filter(topic == "Overall Health") %>%
-select(-class, -topic, -question, -sample_size, -(confidence_limit_low:geo_location)) 
-  
+select(-class, -topic, -question, -sample_size, 
+       -(confidence_limit_low:geo_location))
+
+brfss_spread = spread(brfss_smart2010, key = response, value = data_value)
 ```
