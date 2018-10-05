@@ -227,9 +227,10 @@ median(brfss_spread_2$excellent, na.rm = TRUE)
 ```{r}
 
 brfss_scatter = select(brfss_spread, excellent, locationdesc, year) %>%
-  spread(key = locationdesc, value = excellent) 
+    filter(locationdesc == "NY - Queens County") 
 
-brfss_scatter_2 = select(brfss_scatter, "NY - Queens County", "NY - New York County")
+
+
   
   
                         
