@@ -185,11 +185,27 @@ brfss_spread = spread(brfss_smart2010, key = response, value = data_value) %>%
   janitor::clean_names() %>%
   mutate(proportion_reponse = (excellent + very_good))
 
+# Determining how many unique locations in dataset
 
+select(brfss_spread, locationdesc) %>%
+sapply(function(locationdesc) length(unique(locationdesc)))
 
+# Every represente state
 
+select(brfss_spread, locationabbr) %>%
+  distinct(locationabbr) %>%
+  count()
+```
 
-# created new dataframe in order to calculate median.
+## Answering the questions
+
+1. There are 404 unique locations included within this dataset.
+
+2. Every state is represented. There are total variables within the 'locationsabbr'
+  column indicating that all  states are represented plus an additional state, 
+  which is Washington, D.C.
+
+3. 
  
 brfss_spread_2 = filter(brfss_spread, year == 2002) 
 
@@ -200,4 +216,3 @@ str(brfss_spread)
 
 ggplot(brfss_spread_2, aes(x = excellent)) + geom_histogram()
 
-```
