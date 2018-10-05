@@ -226,6 +226,9 @@ median(brfss_spread_2$excellent, na.rm = TRUE)
 ## Histogram of "Excellent" responses in 2002
 ```{r}
 
+brfss_scatter = select(brfss_spread, excellent, locationabbr, year)   
+                        
+                       
 ggplot(brfss_spread_2, aes(x = excellent)) + geom_histogram()
 
 
