@@ -39,74 +39,72 @@ routes that the trains take as well as whether the trains are ADA compliant.
  cleaning the column names (using the 'janitor' function), removing the unrequested 
  variables (using the 'select' function), and coercing the column variable 'entry'
 into a character variable (the functions 'mutate' and 'recode' were used here).
+* The dimensions of the resulting datset (nyc_transit_clean) is 
+`r dim(nyc_transit_clean)`.
+* No, these data are not tidy. The routesx columns can be merged to form one 
+variable for route number.
 
 
+### Problem 1 Questions
 ```{r}
 # Question 1: Distinct function
-
  distinct(nyc_transit_clean, station_name, line)
-```
- 
-There are 465 distinct stations.
 
-```{r}
 # Question 2: ADA compliance
-
 filter(nyc_transit_clean, ada == TRUE) %>%
 distinct(station_name, line, ada = TRUE)
-```
-There are 84 stations that are ADA compliant.
 
-```{r}
-# Question 3: Proportion
-
-
-
+# Question 1.3: Proportion
 
 filter(nyc_transit_clean, vending == "NO") %>%
 nrow()
 
 filter(nyc_transit_clean, entry == "TRUE", vending == "NO") %>%
 nrow()
-```
 
+
+```
+ 
+* Question 1.1 
+ There are 465 distinct stations.
+
+* Question 1.2 
+There are 84 stations that are ADA compliant.
+
+
+### Reformatting route number and route name
 ```{r}
 # Gathering route columns to make a tidier dataset
-
 nyc_transit_tidy =
   gather(nyc_transit_clean, key = "route_number", value = "route_name", route1:route11) 
 
-## Determining distinct stations that serve A train
-
+# Determining distinct stations that serve A train
 filter(nyc_transit_tidy, route_name == "A") %>%
 distinct(station_name, line, route_name = "A")
-```
 
-There are 60 distinct stations that served the A train.
-
-```{r}
 # Determining ADA compliance
-
 filter(nyc_transit_tidy, route_name == "A", ada == TRUE) %>%
 distinct(station_name, line, ada = TRUE)
 ```
-There are 17 distinct stations that are ADA compliant.
+
+* There are 60 distinct stations that served the A train.
+
+* There are 17 distinct stations that are ADA compliant.
 
 
 # Problem 2
 
-## Use of Mr. Trash Wheel excel dataset
-```{r}
-## Part 2 A
+## Reading and cleaning Mr. Trash Wheel excel dataset
 
+### Part 2A
+```{r}
 library(readxl)
 
 ## Importing and cleaning Mr. Trash Wheel excel file
-
 trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "Mr. Trash Wheel")
 
-
+## Selecting specific sheet, filtering out non-dumpster-specific data, and mutating
 trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "Mr. Trash Wheel", range = "A2:N336") %>% 
               janitor::clean_names() %>% 
@@ -114,9 +112,9 @@ trash_wheel = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
 mutate(sports_balls = as.integer(sports_balls)) 
 ```
 
-```{r}
-## Part 2B
 
+### Part 2B
+```{r}
 ## Reading in Trash Wheel, selecting in sheet "2016 Precipiation", and cleaning
 library(readxl)
 
@@ -125,49 +123,43 @@ precip_16 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
  janitor::clean_names() %>%
   mutate(year = 2016)
 
-
+## Reading in Trash Wheel, selecting in sheet "2017 Precipiation", and cleaning
 precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", 
               sheet = "2017 Precipitation", range = "A2:B14") %>%
  janitor::clean_names() %>%
   mutate(year = 2017)
 
+## Combinging precip_16 and precip_17 datasets and conversion of month t 
 precipitation = bind_rows(precip_16, precip_17) %>%
    mutate(month = month.name[month])
 
 
-# Calculating the total precipiation in 2017
-
+## Calculating the total precipiation in 2017
 total_precip = filter(precipitation, year == 2017)
 
 summarize(total_precip, total = sum(total))
- 
- # Calcuating the median number of sports balls in dumpster in 2016
 
+ 
+# Calcuating the median number of sports balls in dumpster in 2016
 sports_2016 = filter(trash_wheel, year == 2016)
 
 median(sports_2016$sports_balls)
   
 
 ```
-Regarding these datasets, the Mr. Trash Wheel excel file was imported and the sheet,
+* Regarding these datasets, the Mr. Trash Wheel excel file was imported and the sheet,
 specifically focused on Mr. Trash Wheel, was selected for analysis. There were many
 variables retained, including dumpster number, weight of garbage in tons and numbers
 of sports balls and plastic bottles. The number ofobservations in the the dataset 
-trash_wheel was calculated to be `r dim(trash_wheel)`. They key variables of 
-interest were 
-
- 
-There are `r dim(precipitation)` observations in the precipiation dataset. This 
+trash_wheel was calculated to be `r dim(trash_wheel)`. The key variables of 
+interest were sport_balls, plastic_bottles and cigarett_butts.
+* There are `r dim(precipitation)` observations in the precipiation dataset. This 
 dataset was created by merging the precip_16 and precip_17 datasets from the Mr. 
 Trash Wheel excel file. The key variables in this particular data set are the
 months and years of precipiation as well as the toal amount of precipation 
-`r summarize(total_precip, total = sum(total))`. The median number of spors balls 
+`r summarize(total_precip, total = sum(total))`. The median number of sports balls 
 in a dumpster is `r median(sports_2016$sports_balls)`.
 
-
-```{r}
-
-```
 
 # Problem 3
 
