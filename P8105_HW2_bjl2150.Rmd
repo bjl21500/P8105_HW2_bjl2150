@@ -127,21 +127,31 @@ precipitation = bind_rows(precip_16, precip_17) %>%
    mutate(month = month.name[month])
 
 
-# total precipiation in 2017
+# Calculating the total precipiation in 2017
 
 total_precip = filter(precipitation, year == 2017)
 
 summarize(total_precip, total = sum(total))
-  
-  
+ 
+ # Calcuating the median number of sports balls in dumpster in 2016
+
+sports_2016 = filter(trash_wheel, year == 2016)
+
+median(sports_2016$sports_balls)
   
 
 ```
+Regarding these datasets, the Mr. Trash Wheel excel file was imported and the sheet
+specifically focused on Mr. Trash Wheel was selected for analysis. There were many
+variables retained, including dumpster number, weight of garbage in tons and numbers
+of sports balls and plastic bottles. 
+
 The number of observations in the dataset trash_wheel is `r dim(trash_wheel)`. The 
 key variables in are dumpster, weight tons of trash, and plastic bottles collected.
 The number of variables in the precipitation dataset is `r dim(precipitation)`. The 
 key variables in this particular data set are the months and years of precipiation 
-as well as the toal amount of precipation `r summarize(total_precip, total = sum(total))`
+as well as the toal amount of precipation `r summarize(total_precip, total = sum(total))`.
+The median number of spors balls in a dumpster is `r median(sports_2016$sports_balls)`.
 
 
 
