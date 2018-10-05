@@ -226,7 +226,12 @@ median(brfss_spread_2$excellent, na.rm = TRUE)
 ## Histogram of "Excellent" responses in 2002
 ```{r}
 
-brfss_scatter = select(brfss_spread, excellent, locationabbr, year)   
+brfss_scatter = select(brfss_spread, excellent, locationdesc, year) %>%
+  spread(key = locationdesc, value = excellent) 
+
+brfss_scatter_2 = select(brfss_scatter, "NY - Queens County", "NY - New York County")
+  
+  
                         
                        
 ggplot(brfss_spread_2, aes(x = excellent)) + geom_histogram()
