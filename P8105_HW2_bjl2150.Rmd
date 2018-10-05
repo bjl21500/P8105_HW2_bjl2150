@@ -223,20 +223,15 @@ median(brfss_spread_2$excellent, na.rm = TRUE)
     response values in 2002. 
 
 
-## Histogram of "Excellent" responses in 2002
+### Histogram of "Excellent" responses in 2002
 ```{r}
+ggplot(brfss_spread_2, aes(x = excellent)) + geom_histogram()
+```
 
+### Scatterplot of Queens and New York Counties
+```{r}
 brfss_scatter = select(brfss_spread, excellent, locationdesc, year) %>%
     filter(locationdesc == "NY - Queens County") 
-
-
-
-  
-  
-                        
-                       
-ggplot(brfss_spread_2, aes(x = excellent)) + geom_histogram()
-
 
 
 
