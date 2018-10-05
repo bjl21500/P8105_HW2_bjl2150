@@ -79,10 +79,10 @@ There are 60 distinct stations that served the A train.
 ```{r}
 # Determining ADA compliance
 
-filter(nyc_transit_tidy, ada == TRUE) %>%
+filter(nyc_transit_tidy, route_name == "A", ada == TRUE) %>%
 distinct(station_name, line, ada = TRUE)
 ```
-There are 84 distinct stations that are ADA compliant.
+There are 17 distinct stations that are ADA compliant.
 
 
 # Problem 2
