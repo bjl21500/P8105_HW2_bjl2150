@@ -198,6 +198,13 @@ select(brfss_spread, locationabbr) %>%
 
 count(brfss_spread, vars = locationabbr) %>% View
 
+
+# Filtering year = 2002
+brfss_spread_2 = filter(brfss_spread, year == 2002)
+
+  
+# Finding the median of the excellent responses
+median(brfss_spread_2$excellent, na.rm = TRUE)
 ```
 
 ## Answering the Problem 3 questions
@@ -210,17 +217,18 @@ count(brfss_spread, vars = locationabbr) %>% View
 
   * 1C.  The state that is observed the most is New Jersey with 146 observations.
   
+  
  
-2. 
+2. `r median(brfss_spread_2$excellent, na.rm = TRUE)` is the median of the "Excellent"
+    response values in 2002. 
 
 
- 
-brfss_spread_2 = filter(brfss_spread, year == 2002) 
-
-
-median(brfss_spread_2$excellent)
-
-str(brfss_spread)
+## Histogram of "Excellent" responses in 2002
+```{r}
 
 ggplot(brfss_spread_2, aes(x = excellent)) + geom_histogram()
 
+
+
+
+```
