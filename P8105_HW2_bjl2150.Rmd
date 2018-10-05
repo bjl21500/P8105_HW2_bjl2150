@@ -54,8 +54,7 @@ variable for route number.
 filter(nyc_transit_clean, ada == TRUE) %>%
 distinct(station_name, line, ada = TRUE)
 
-# Question 1.3: Proportion
-
+# Question 3: Proportion
 ## Setting 'y' variable equal entrances/exits without vending
 y = filter(nyc_transit_clean, vending == "NO") %>%
 nrow()
@@ -100,7 +99,7 @@ distinct(station_name, line, ada = TRUE)
 
 ## Reading and cleaning Mr. Trash Wheel excel dataset
 
-### Part 2A
+### Part 2A - Mr. Trash Wheel
 ```{r}
 library(readxl)
 
@@ -117,7 +116,7 @@ mutate(sports_balls = as.integer(sports_balls))
 ```
 
 
-### Part 2B
+### Part 2B - Precipitation 2016 and 2017
 ```{r}
 # Reading in Trash Wheel, selecting in sheet "2016 Precipiation", and cleaning
 library(readxl)
@@ -133,7 +132,7 @@ precip_17 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx",
  janitor::clean_names() %>%
   mutate(year = 2017)
 
-# Combinging precip_16 and precip_17 datasets and conversion of month t 
+# Combining precip_16 and precip_17 datasets and conversion of month t 
 precipitation = bind_rows(precip_16, precip_17) %>%
    mutate(month = month.name[month])
 
@@ -144,12 +143,10 @@ total_precip = filter(precipitation, year == 2017)
 summarize(total_precip, total = sum(total))
 
  
-# Calcuating the median number of sports balls in dumpster in 2016
+# Calculating the median number of sports balls in dumpster in 2016
 sports_2016 = filter(trash_wheel, year == 2016)
 
 median(sports_2016$sports_balls)
-  
-
 ```
 * Regarding these datasets, the Mr. Trash Wheel excel file was imported and the sheet,
 specifically focused on Mr. Trash Wheel, was selected for analysis. There were many
@@ -194,7 +191,7 @@ brfss_spread = spread(brfss_smart2010, key = response, value = data_value) %>%
 select(brfss_spread, locationdesc) %>%
 sapply(function(locationdesc) length(unique(locationdesc)))
 
-# Every represente state
+# Every represented state
 
 select(brfss_spread, locationabbr) %>%
   distinct(locationabbr) %>%
@@ -211,7 +208,7 @@ brfss_spread_2 = filter(brfss_spread, year == 2002)
 median(brfss_spread_2$excellent, na.rm = TRUE)
 ```
 
-## Answering the Problem 3 questions
+## Answering Problem 3 questions
 
 * There are 404 unique locations included within this dataset.
 
@@ -246,5 +243,4 @@ brfss_plot = filter(brfss_scatter, locationdesc %in% target)
 # Making of scatterplot
 ggplot(brfss_plot, aes(x = excellent, y = year)) + 
   geom_point(aes(color = locationdesc))
-
 ```
