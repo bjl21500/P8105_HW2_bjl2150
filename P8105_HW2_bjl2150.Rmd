@@ -185,6 +185,10 @@ brfss_spread = spread(brfss_smart2010, key = response, value = data_value) %>%
   janitor::clean_names() %>%
   mutate(proportion_reponse = (excellent + very_good))
 
+
+
+
+
 # created new dataframe in order to calculate median.
  
 brfss_spread_2 = filter(brfss_spread, year == 2002) 
